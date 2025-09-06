@@ -1,23 +1,55 @@
+// TODO: Implementation tasks for Huffman encoding
+//  1. Implement structures used
+//  2. Implement a minimum heap
+//  3. Implement the huffman encoding algorithm
+
+pub trait HuffmanTreeNode {
+    fn get_frequency(&self) -> u32;
+}
+
+struct HuffmanTreeInnerNode<'a, T: HuffmanTreeNode> {
+    frequency: u32,
+    left_child: &'a T,
+    right_child: &'a T,
+}
+
+impl<'a, T: HuffmanTreeNode> HuffmanTreeInnerNode<'a, T> {
+    fn new(left_node: &'a T, right_node: &'a T) -> HuffmanTreeInnerNode<'a, T> {
+        let frequency = left_node.get_frequency() + right_node.get_frequency();
+        HuffmanTreeInnerNode {
+            frequency: frequency,
+            left_child: left_node,
+            right_child: right_node,
+        }
+    }
+}
+
+impl<'a, T: HuffmanTreeNode> HuffmanTreeNode for HuffmanTreeInnerNode<'a, T> {
+    fn get_frequency(&self) -> u32 {
+        return self.frequency;
+    }
+}
+
+struct HuffmanTreeLeafNode {
+    frequency: u32,
+    character: String,
+}
+
+impl HuffmanTreeNode for HuffmanTreeLeafNode {
+    fn get_frequency(&self) -> u32 {
+        return self.frequency;
+    }
+}
+
+impl HuffmanTreeLeafNode {
+    fn new(frequency: u32, character: String) -> HuffmanTreeLeafNode {
+        HuffmanTreeLeafNode {
+            frequency: frequency,
+            character: character,
+        }
+    }
+}
+
 fn main() {
-    let s = String::from("hello");  // s comes into scope
-
-    takes_ownership(s);             // s's value moves into the function...
-                                    // ... and so is no longer valid here
-
-    let x = 5;                      // x comes into scope
-
-    makes_copy(x);                  // Because i32 implements the Copy trait,
-                                    // x does NOT move into the function,
-                                    // so it's okay to use x afterward.
-
-} // Here, x goes out of scope, then s. However, because s's value was moved,
-  // nothing special happens.
-
-fn takes_ownership(some_string: String) { // some_string comes into scope
-    println!("{some_string}");
-} // Here, some_string goes out of scope and `drop` is called. The backing
-  // memory is freed.
-
-fn makes_copy(some_integer: i32) { // some_integer comes into scope
-    println!("{some_integer}");
-} // Here, some_integer goes out of scope. Nothing special happens.
+    let s = String::from("hello"); // s comes into scope
+}
