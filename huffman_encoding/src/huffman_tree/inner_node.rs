@@ -1,13 +1,13 @@
-use crate::huffman_tree::HuffmanTreeNode;
+use crate::huffman_tree::{HuffmanTreeNode, StoresFrequency};
 
-pub struct HuffmanTreeInnerNode<T: HuffmanTreeNode> {
+pub struct HuffmanTreeInnerNode {
     frequency: u32,
-    left_child: Box<T>,
-    right_child: Box<T>,
+    left_child: Box<HuffmanTreeNode>,
+    right_child: Box<HuffmanTreeNode>,
 }
 
-impl<T: HuffmanTreeNode> HuffmanTreeInnerNode<T> {
-    pub fn new(left_node: Box<T>, right_node: Box<T>) -> HuffmanTreeInnerNode<T> {
+impl HuffmanTreeInnerNode {
+    pub fn new(left_node: Box<HuffmanTreeNode>, right_node: Box<HuffmanTreeNode>) -> HuffmanTreeInnerNode {
         let frequency = left_node.get_frequency() + right_node.get_frequency();
         HuffmanTreeInnerNode {
             frequency: frequency,
@@ -17,7 +17,7 @@ impl<T: HuffmanTreeNode> HuffmanTreeInnerNode<T> {
     }
 }
 
-impl<T: HuffmanTreeNode> HuffmanTreeNode for HuffmanTreeInnerNode<T> {
+impl StoresFrequency for HuffmanTreeInnerNode {
     fn get_frequency(&self) -> u32 {
         return self.frequency;
     }

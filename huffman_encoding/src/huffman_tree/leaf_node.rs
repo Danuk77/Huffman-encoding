@@ -1,11 +1,11 @@
-use crate::huffman_tree::HuffmanTreeNode;
+use crate::huffman_tree::StoresFrequency;
 
 pub struct HuffmanTreeLeafNode {
     frequency: u32,
     character: String,
 }
 
-impl HuffmanTreeNode for HuffmanTreeLeafNode {
+impl StoresFrequency for HuffmanTreeLeafNode {
     fn get_frequency(&self) -> u32 {
         return self.frequency;
     }
