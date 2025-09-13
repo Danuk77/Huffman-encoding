@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 pub mod inner_node;
 pub mod leaf_node;
 
@@ -21,3 +23,23 @@ impl StoresFrequency for HuffmanTreeNode{
         }
     }
 }
+
+impl Ord for HuffmanTreeNode {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.get_frequency().cmp(&other.get_frequency())
+    }
+}
+
+impl PartialOrd for HuffmanTreeNode {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for HuffmanTreeNode {
+    fn eq(&self, other: &Self) -> bool {
+        self.get_frequency() == other.get_frequency()
+    }
+}
+
+impl Eq for HuffmanTreeNode {}
