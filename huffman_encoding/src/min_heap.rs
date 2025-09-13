@@ -12,7 +12,7 @@ pub struct MinPriorityQueue<T: Ord> {
 impl<T: Ord> MinHeap<T> for MinPriorityQueue<T> {
     fn insert(&mut self, item_to_insert: Box<T>) {
         self.items.push(item_to_insert);
-        if self.items.len() == 1{
+        if self.items.len() == 1 {
             return;
         }
         self.bubble_up();
@@ -20,13 +20,14 @@ impl<T: Ord> MinHeap<T> for MinPriorityQueue<T> {
 
     fn bubble_up(&mut self) -> () {
         let mut index_of_item_to_bubble_up = self.items.len() - 1;
-        let mut index_of_parent = (index_of_item_to_bubble_up - 1) / 2;
 
-        while self.items[index_of_parent] > self.items[index_of_item_to_bubble_up]{
+        while index_of_item_to_bubble_up > 0 {
+            let index_of_parent = (index_of_item_to_bubble_up - 1) / 2;
+            if self.items[index_of_parent] <= self.items[index_of_item_to_bubble_up] {
+                return;
+            }
             self.items.swap(index_of_parent, index_of_item_to_bubble_up);
-
             index_of_item_to_bubble_up = index_of_parent;
-            index_of_parent = (index_of_item_to_bubble_up - 1) / 2;
         }
     }
 

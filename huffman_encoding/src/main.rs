@@ -6,7 +6,7 @@
 mod huffman_tree;
 mod min_heap;
 use huffman_tree::{HuffmanTreeNode, HuffmanTreeLeafNode, HuffmanTreeInnerNode};
-//use min_heap::MinPriorityQueue;
+use min_heap::MinPriorityQueue;
 
 fn main() {
     // Create the leaf nodes
@@ -23,4 +23,6 @@ fn main() {
     let abe = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(ab, e)));
     let cdabe = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(cd, abe)));
     let fcdabe = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(f, cdabe)));
+
+    let queue = MinPriorityQueue::<Box::<HuffmanTreeNode>>::new();
 }
