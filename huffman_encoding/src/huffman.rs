@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use crate::heap::{MinHeap, MinPriorityQueue};
 use crate::huffman_tree::{HuffmanTreeInnerNode, HuffmanTreeLeafNode, HuffmanTreeNode};
 
@@ -30,8 +32,8 @@ pub fn generate_huffman_tree(
 }
 
 fn _run_huffman_iteration(queue: &mut MinPriorityQueue<HuffmanTreeNode>) {
-    let _least_frequent_symbol = queue.pop().expect("Should not reach here 1");
-    let _second_least_frequent_symbol = queue.pop().expect("Should not reach here 2");
+    let _least_frequent_symbol = queue.get_min_element().expect("Should not reach here 1");
+    let _second_least_frequent_symbol = queue.get_min_element().expect("Should not reach here 2");
 
     let _new_inner_node = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(
         _least_frequent_symbol,
@@ -39,4 +41,34 @@ fn _run_huffman_iteration(queue: &mut MinPriorityQueue<HuffmanTreeNode>) {
     )));
 
     queue.insert(_new_inner_node);
+}
+
+pub fn generate_prefix_codes(tree_root: &HuffmanTreeNode) -> HashMap<String, String> {
+    let mut prefix_codes = HashMap::<String, String>::new();
+    _traverse_tree_and_generate_prefix_codes(tree_root, String::new(), &mut prefix_codes);
+    prefix_codes
+}
+
+fn _traverse_tree_and_generate_prefix_codes(
+    huffman_node: &HuffmanTreeNode,
+    accumulated_prefix: String,
+    prefix_codes: &mut HashMap<String, String>,
+) {
+    match huffman_node {
+        HuffmanTreeNode::LeafNode(leaf_node) => {
+            prefix_codes.insert(leaf_node.get_symbol(), accumulated_prefix.clone());
+        }
+        HuffmanTreeNode::InnerNode(inner_node) => {
+            _traverse_tree_and_generate_prefix_codes(
+                inner_node.left_child(),
+                format!("{}0", accumulated_prefix),
+                prefix_codes,
+            );
+            _traverse_tree_and_generate_prefix_codes(
+                inner_node.right_child(),
+                format!("{}0", accumulated_prefix),
+                prefix_codes,
+            );
+        }
+    }
 }

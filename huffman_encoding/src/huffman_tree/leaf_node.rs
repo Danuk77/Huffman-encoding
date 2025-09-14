@@ -7,7 +7,7 @@ pub struct HuffmanTreeLeafNode {
 
 impl StoresFrequency for HuffmanTreeLeafNode {
     fn get_frequency(&self) -> u32 {
-        return self.frequency;
+        self.frequency
     }
 }
 
@@ -17,5 +17,9 @@ impl HuffmanTreeLeafNode {
             frequency: frequency,
             character: character,
         }
+    }
+
+    pub fn get_symbol(&self) -> String{
+        self.character.clone()
     }
 }

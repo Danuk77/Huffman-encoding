@@ -15,6 +15,14 @@ impl HuffmanTreeInnerNode {
             right_child: right_node,
         }
     }
+
+    pub fn left_child(&self) -> &Box<HuffmanTreeNode>{
+        &self.left_child
+    }
+
+    pub fn right_child(&self) -> &Box<HuffmanTreeNode>{
+        &self.right_child
+    }
 }
 
 impl StoresFrequency for HuffmanTreeInnerNode {
