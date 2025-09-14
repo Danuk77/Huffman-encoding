@@ -74,6 +74,18 @@ impl<T: Ord> MinPriorityQueue<T> {
         MinPriorityQueue { items: Vec::new() }
     }
 
+    pub fn len(&self) -> usize{
+        self.items.len()
+    }
+
+    pub fn is_empty(&self) -> bool{
+        self.items.is_empty()
+    }
+
+    pub fn pop(&mut self) -> Option<Box<T>>{
+        self.items.pop()
+    }
+
     fn _swap_root_with_last_element(&mut self) -> () {
         let _index_of_last_item_in_queue = self.items.len() - 1;
         self.items.swap(0, _index_of_last_item_in_queue);

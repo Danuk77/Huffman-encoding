@@ -1,28 +1,29 @@
-// TODO: Implementation tasks for Huffman encoding
-//  1. Implement structures used
-//  2. Implement a minimum heap
-//  3. Implement the huffman encoding algorithm
-
+mod heap;
+mod huffman;
 mod huffman_tree;
-mod min_heap;
-use huffman_tree::{HuffmanTreeNode, HuffmanTreeLeafNode, HuffmanTreeInnerNode};
-use min_heap::MinPriorityQueue;
+
+use heap::MinPriorityQueue;
+use huffman::{populate_huffman_queue_with_symbols, generate_huffman_tree};
+use huffman_tree::HuffmanTreeNode;
 
 fn main() {
-    // Create the leaf nodes
-    let c = Box::new(HuffmanTreeNode::LeafNode(HuffmanTreeLeafNode::new(12, String::from("c"))));
-    let d = Box::new(HuffmanTreeNode::LeafNode(HuffmanTreeLeafNode::new(13, String::from("d"))));
-    let a = Box::new(HuffmanTreeNode::LeafNode(HuffmanTreeLeafNode::new(5, String::from("a"))));
-    let b = Box::new(HuffmanTreeNode::LeafNode(HuffmanTreeLeafNode::new(9, String::from("b"))));
-    let e = Box::new(HuffmanTreeNode::LeafNode(HuffmanTreeLeafNode::new(16, String::from("e"))));
-    let f = Box::new(HuffmanTreeNode::LeafNode(HuffmanTreeLeafNode:: new(45, String::from("f"))));
-
+    let mut queue = MinPriorityQueue::<HuffmanTreeNode>::new();
+    let symbols_to_add = vec![
+        (12, "c".to_string()),
+        (13, "d".to_string()),
+        (5, "a".to_string()),
+        (9, "b".to_string()),
+        (16, "e".to_string()),
+        (45, "f".to_string()),
+    ];
+    populate_huffman_queue_with_symbols(&mut queue, symbols_to_add);
+    let _huffman_tree = generate_huffman_tree(&mut queue).unwrap();
+    
     // Create the inner nodes
-    let cd = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(c, d)));
-    let ab = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(a, b)));
-    let abe = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(ab, e)));
-    let cdabe = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(cd, abe)));
-    let fcdabe = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(f, cdabe)));
+    //let cd = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(c, d)));
+    //let ab = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(a, b)));
+    //let abe = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(ab, e)));
+    //let cdabe = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(cd, abe)));
+    //let fcdabe = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(f, cdabe)));
 
-    let queue = MinPriorityQueue::<Box::<HuffmanTreeNode>>::new();
 }
