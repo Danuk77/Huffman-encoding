@@ -8,12 +8,10 @@ pub struct MinPriorityQueue<T: Ord> {
 impl<T: Ord + std::fmt::Debug> MinHeap<T> for MinPriorityQueue<T> {
     fn insert(&mut self, item_to_insert: Box<T>) {
         self.items.push(item_to_insert);
-        //println!("{:?}", self.items);
         if self.items.len() == 1 {
             return;
         }
         self._bubble_up();
-        //println!("{:?}", self.items);
     }
 
     fn _bubble_up(&mut self) -> () {
@@ -37,7 +35,6 @@ impl<T: Ord + std::fmt::Debug> MinHeap<T> for MinPriorityQueue<T> {
 
         self._swap_root_with_last_element();
         let min_item = self.items.pop();
-        //println!("{:?}", self.items);
         self._bubble_down();
 
         min_item

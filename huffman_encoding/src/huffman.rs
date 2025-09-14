@@ -1,9 +1,7 @@
 use std::collections::HashMap;
 
 use crate::heap::{MinHeap, MinPriorityQueue};
-use crate::huffman_tree::{
-    HuffmanTreeInnerNode, HuffmanTreeLeafNode, HuffmanTreeNode
-};
+use crate::huffman_tree::{HuffmanTreeInnerNode, HuffmanTreeLeafNode, HuffmanTreeNode};
 
 pub fn populate_huffman_queue_with_symbols(
     queue: &mut MinPriorityQueue<HuffmanTreeNode>,
@@ -24,52 +22,17 @@ pub fn generate_huffman_tree(
         return None;
     }
 
-    println!("");
-    println!("");
-    println!("");
-
-    let mut counter = 0;
     loop {
-        println!("Iteration {}", counter);
         if queue.len() == 1 {
             return Some(queue.pop().unwrap());
         }
-
         _run_huffman_iteration(queue);
-        counter += 1;
-        println!("End iteration{}", counter);
-        println!("");
     }
 }
 
 fn _run_huffman_iteration(queue: &mut MinPriorityQueue<HuffmanTreeNode>) {
     let _least_frequent_symbol = queue.get_min_element().expect("Should not reach here 1");
     let _second_least_frequent_symbol = queue.get_min_element().expect("Should not reach here 2");
-
-    //println!("Least frequent");
-    //match &*_least_frequent_symbol {
-    //    HuffmanTreeNode::InnerNode(inner) => {
-    //        println!("Inner node, frequency {}", inner.get_frequency())
-    //    }
-    //    HuffmanTreeNode::LeafNode(leaf) => println!(
-    //        "Leaf node, symbol {}, frequency {}",
-    //        leaf.get_symbol(),
-    //        leaf.get_frequency()
-    //    ),
-    //}
-
-    //println!("Second least frequent");
-    //match &*_second_least_frequent_symbol {
-    //    HuffmanTreeNode::InnerNode(inner) => {
-    //        println!("Inner node, frequency {}", inner.get_frequency())
-    //    }
-    //    HuffmanTreeNode::LeafNode(leaf) => println!(
-    //        "Leaf node, symbol {}, frequency {}",
-    //        leaf.get_symbol(),
-    //        leaf.get_frequency()
-    //    ),
-    //}
-
     let _new_inner_node = Box::new(HuffmanTreeNode::InnerNode(HuffmanTreeInnerNode::new(
         _least_frequent_symbol,
         _second_least_frequent_symbol,
