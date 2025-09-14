@@ -66,7 +66,7 @@ fn _traverse_tree_and_generate_prefix_codes(
             );
             _traverse_tree_and_generate_prefix_codes(
                 inner_node.right_child(),
-                format!("{}0", accumulated_prefix),
+                format!("{}1", accumulated_prefix),
                 prefix_codes,
             );
         }
