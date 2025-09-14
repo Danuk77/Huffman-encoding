@@ -1,5 +1,6 @@
 use crate::heap::MinHeap;
 
+#[derive(Debug)]
 pub struct MinPriorityQueue<T: Ord> {
     items: Vec<Box<T>>,
 }

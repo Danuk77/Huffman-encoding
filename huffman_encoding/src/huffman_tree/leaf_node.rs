@@ -1,5 +1,6 @@
 use crate::huffman_tree::StoresFrequency;
 
+#[derive(Debug)]
 pub struct HuffmanTreeLeafNode {
     frequency: u32,
     character: String,

@@ -10,6 +10,7 @@ pub trait StoresFrequency {
     fn get_frequency(&self) -> u32;
 }
 
+#[derive(Debug)]
 pub enum HuffmanTreeNode {
     InnerNode(HuffmanTreeInnerNode),
     LeafNode(HuffmanTreeLeafNode),

@@ -1,5 +1,6 @@
 use crate::huffman_tree::{HuffmanTreeNode, StoresFrequency};
 
+#[derive(Debug)]
 pub struct HuffmanTreeInnerNode {
     frequency: u32,
     left_child: Box<HuffmanTreeNode>,
