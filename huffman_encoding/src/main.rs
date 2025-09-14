@@ -17,9 +17,12 @@ fn main() {
         (45, "f".to_string()),
     ];
     populate_huffman_queue_with_symbols(&mut queue, symbols_to_add);
-    println!("{:?}", queue);
-    let _huffman_tree = generate_huffman_tree(&mut queue).unwrap();
-    let _prefix_codes = generate_prefix_codes(&_huffman_tree);
 
+    let _huffman_tree = generate_huffman_tree(&mut queue).unwrap();
+    println!("{:?}", _huffman_tree);
+    println!("");
+
+    let _prefix_codes = generate_prefix_codes(&_huffman_tree);
     println!("{:?}", _prefix_codes);
+    println!("");
 }

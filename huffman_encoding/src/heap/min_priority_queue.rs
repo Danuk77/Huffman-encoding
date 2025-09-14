@@ -5,13 +5,15 @@ pub struct MinPriorityQueue<T: Ord> {
     items: Vec<Box<T>>,
 }
 
-impl<T: Ord> MinHeap<T> for MinPriorityQueue<T> {
+impl<T: Ord + std::fmt::Debug> MinHeap<T> for MinPriorityQueue<T> {
     fn insert(&mut self, item_to_insert: Box<T>) {
         self.items.push(item_to_insert);
+        //println!("{:?}", self.items);
         if self.items.len() == 1 {
             return;
         }
         self._bubble_up();
+        //println!("{:?}", self.items);
     }
 
     fn _bubble_up(&mut self) -> () {
@@ -35,6 +37,7 @@ impl<T: Ord> MinHeap<T> for MinPriorityQueue<T> {
 
         self._swap_root_with_last_element();
         let min_item = self.items.pop();
+        //println!("{:?}", self.items);
         self._bubble_down();
 
         min_item
@@ -47,7 +50,7 @@ impl<T: Ord> MinHeap<T> for MinPriorityQueue<T> {
             let mut _index_of_smallest_item = _index_of_item_to_bubble_down;
             let _left_child_index =
                 self._get_left_child_index_if_exist(_index_of_item_to_bubble_down);
-            let _right_child = self._get_right_child_index_if_exist(_index_of_item_to_bubble_down);
+            let _right_child_index = self._get_right_child_index_if_exist(_index_of_item_to_bubble_down);
 
             // TODO: Change this to let Some
             self._update_index_of_smalles_item_if_child_is_smaller(
@@ -56,7 +59,7 @@ impl<T: Ord> MinHeap<T> for MinPriorityQueue<T> {
             );
             self._update_index_of_smalles_item_if_child_is_smaller(
                 &mut _index_of_smallest_item,
-                _left_child_index,
+                _right_child_index,
             );
 
             if _index_of_smallest_item == _index_of_item_to_bubble_down {
@@ -70,20 +73,20 @@ impl<T: Ord> MinHeap<T> for MinPriorityQueue<T> {
     }
 }
 
-impl<T: Ord> MinPriorityQueue<T> {
+impl<T: Ord + std::fmt::Debug> MinPriorityQueue<T> {
     pub fn new() -> MinPriorityQueue<T> {
         MinPriorityQueue { items: Vec::new() }
     }
 
-    pub fn len(&self) -> usize{
+    pub fn len(&self) -> usize {
         self.items.len()
     }
 
-    pub fn is_empty(&self) -> bool{
+    pub fn is_empty(&self) -> bool {
         self.items.is_empty()
     }
 
-    pub fn pop(&mut self) -> Option<Box<T>>{
+    pub fn pop(&mut self) -> Option<Box<T>> {
         self.items.pop()
     }
 
